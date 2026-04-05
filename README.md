@@ -58,13 +58,21 @@ streamlit run dashboard.py
 ## Project Structure
 
 agents.py — 4 LLM agents and LLM complexity router
+
 orchestrator.py — central state machine, budget control, eval scoring
+
 observability.py — SQLite logging for all agent calls
-memory.py — ChromaDB vector memory interface
-memory_worker.py — isolated subprocess worker for ChromaDB
+
+memory.py — ChromaDB vector memory 
+
+memory_worker.py — isolated subprocess worker for 
+
 evaluator.py — eval framework, scoring logic, prompt version tracking
+
 debugger.py — structured debug logging per agent call
-dashboard.py — Streamlit UI with Pipeline, Observability, Evals, and Debug tabs
+
+dashboard.py — Streamlit UI with Pipeline, Observability, Evals, and Debug 
+
 .gitignore — excludes .env, databases, __pycache__, chroma_db
 
 ## Key Design Decisions
