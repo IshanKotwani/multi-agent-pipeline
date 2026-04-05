@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+chroma_db/
+pipeline.db
+evals.db
+debug.db
