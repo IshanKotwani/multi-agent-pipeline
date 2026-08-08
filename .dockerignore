@@ -1,9 +1,8 @@
+.git
 __pycache__/
 *.pyc
 .env
+.venv
 chroma_db/
-pipeline.db
-evals.db
-debug.db
 *.db
-.venv/
+data/

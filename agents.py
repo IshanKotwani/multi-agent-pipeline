@@ -34,7 +34,7 @@ REASON: <one sentence>"""},
             {"role": "user", "content": f"Topic: {topic}"}
         ]
     )
-    output = response.content[0]['text']
+    output = response.choices[0].message.content
     lines = output.strip().split('\n')
     score = 5
     reason = "Default routing"
@@ -80,13 +80,13 @@ Be factual, thorough, and concise within each section."""
                 {"role": "user", "content": prompt}
             ]
         )
-        output = response.content[0]['text']
+        output = response.choices[0].message.content
         latency = round((time.time() - start) * 1000)
         log_debug(task_id, "research", prompt, raw_output=output, attempt=attempt, latency_ms=latency, model=model)
         return {
             "output": output,
-            "input_tokens": response.usage.input_tokens,
-            "output_tokens": response.usage.output_tokens,
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
             "latency_ms": latency,
             "model": model
         }
@@ -110,13 +110,13 @@ Be accurate and faithful to the source material. Format as a simple bullet list.
                 {"role": "user", "content": prompt}
             ]
         )
-        output = response.content[0]['text']
+        output = response.choices[0].message.content
         latency = round((time.time() - start) * 1000)
         log_debug(task_id, "summarise", prompt, raw_output=output, attempt=attempt, latency_ms=latency, model=model)
         return {
             "output": output,
-            "input_tokens": response.usage.input_tokens,
-            "output_tokens": response.usage.output_tokens,
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
             "latency_ms": latency,
             "model": model
         }
@@ -142,15 +142,15 @@ Briefly note any issues, then end your response with either PASS or FAIL on its 
                 {"role": "user", "content": prompt}
             ]
         )
-        output = response.content[0]['text']
+        output = response.choices[0].message.content
         passed = output.strip().endswith("PASS")
         latency = round((time.time() - start) * 1000)
         log_debug(task_id, "validate", prompt, raw_output=output, attempt=attempt, latency_ms=latency, model=model)
         return {
             "output": output,
             "passed": passed,
-            "input_tokens": response.usage.input_tokens,
-            "output_tokens": response.usage.output_tokens,
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
             "latency_ms": latency,
             "model": model
         }
@@ -180,13 +180,13 @@ Make it professional and concise — suitable for a senior stakeholder."""
                 {"role": "user", "content": prompt}
             ]
         )
-        output = response.content[0]['text']
+        output = response.choices[0].message.content
         latency = round((time.time() - start) * 1000)
         log_debug(task_id, "report_writer", prompt, raw_output=output, attempt=attempt, latency_ms=latency, model=model)
         return {
             "output": output,
-            "input_tokens": response.usage.input_tokens,
-            "output_tokens": response.usage.output_tokens,
+            "input_tokens": response.usage.prompt_tokens,
+            "output_tokens": response.usage.completion_tokens,
             "latency_ms": latency,
             "model": model
         }

@@ -1,8 +1,11 @@
+import os
 import sqlite3
 import uuid
 from datetime import datetime
 
-DEBUG_DB = "debug.db"
+DATA_DIR = os.getenv("DATA_DIR", ".")
+os.makedirs(DATA_DIR, exist_ok=True)
+DEBUG_DB = os.path.join(DATA_DIR, "debug.db")
 
 def init_debug_db():
     conn = sqlite3.connect(DEBUG_DB)

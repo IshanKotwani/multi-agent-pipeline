@@ -1,8 +1,11 @@
+import os
 import sqlite3
 import uuid
 from datetime import datetime
 
-DB_PATH = "pipeline.db"
+DATA_DIR = os.getenv("DATA_DIR", ".")
+os.makedirs(DATA_DIR, exist_ok=True)
+DB_PATH = os.path.join(DATA_DIR, "pipeline.db")
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)

@@ -4,7 +4,8 @@ import json
 import sys
 import os
 
-DB_PATH = "./chroma_db"
+DATA_DIR = os.getenv("DATA_DIR", ".")
+DB_PATH = os.path.join(DATA_DIR, "chroma_db")
 
 def _make_id(topic: str) -> str:
     return hashlib.md5(topic.lower().strip().encode()).hexdigest()

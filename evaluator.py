@@ -4,7 +4,9 @@ import sqlite3
 import uuid
 from datetime import datetime
 
-EVAL_DB = "evals.db"
+DATA_DIR = os.getenv("DATA_DIR", ".")
+os.makedirs(DATA_DIR, exist_ok=True)
+EVAL_DB = os.path.join(DATA_DIR, "evals.db")
 
 # Fixed eval set — ground truth topics each research output must cover
 EVAL_CASES = [
