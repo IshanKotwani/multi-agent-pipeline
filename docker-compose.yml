@@ -1,0 +1,18 @@
+# docker-compose.yml
+# Describes how to build and run your app, so instead of a long
+# "docker run ..." command you just type:  docker compose up
+
+services:
+  app:                            # a name for this service (your app)
+    build: .                      # build the image from the Dockerfile in this folder
+    image: multi-agent-pipeline   # name the built image
+    container_name: multi-agent-pipeline
+    ports:
+      - "8501:8501"               # map container's 8501 to your computer's 8501
+    env_file:
+      - .env                      # load your API key at runtime (never baked into the image)
+    volumes:
+      - pipeline_data:/app/data   # persist ChromaDB + SQLite outside the container
+
+volumes:
+  pipeline_data:                  # declares the named volume used above
