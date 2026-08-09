@@ -1,0 +1,12 @@
+# Service: gives your Pod a stable address inside the cluster.
+# We'll reach it from the browser using "kubectl port-forward".
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-agent-pipeline
+spec:
+  selector:
+    app: multi-agent-pipeline    # sends traffic to Pods with this label
+  ports:
+    - port: 8501
+      targetPort: 8501

@@ -1,0 +1,13 @@
+# PersistentVolumeClaim: asks Kubernetes for storage that survives
+# even when the Pod is deleted and recreated. This is the K8s
+# equivalent of the Docker volume you used earlier.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pipeline-data
+spec:
+  accessModes:
+    - ReadWriteOnce        # one node mounts it read/write at a time
+  resources:
+    requests:
+      storage: 1Gi         # how much space to reserve

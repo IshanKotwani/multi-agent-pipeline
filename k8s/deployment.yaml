@@ -1,0 +1,42 @@
+# Deployment: runs your app container and keeps it running,
+# restarting it automatically if it ever crashes.
+# We run ONE replica on purpose (see note at the bottom).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-agent-pipeline
+  labels:
+    app: multi-agent-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-agent-pipeline
+  template:
+    metadata:
+      labels:
+        app: multi-agent-pipeline
+    spec:
+      containers:
+        - name: app
+          image: multi-agent-pipeline:latest
+          imagePullPolicy: IfNotPresent   # use the image you built locally; don't pull from the internet
+          ports:
+            - containerPort: 8501
+          envFrom:
+            - secretRef:
+                name: pipeline-secrets     # injects ANTHROPIC_API_KEY from the Secret you'll create
+          volumeMounts:
+            - name: data
+              mountPath: /app/data         # where the app writes Chroma + SQLite
+          resources:
+            requests:                       # what the Pod needs to start
+              memory: "256Mi"
+              cpu: "100m"
+            limits:                         # a ceiling so it can't hog the machine
+              memory: "1Gi"
+              cpu: "1000m"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pipeline-data        # connects the storage above to this Pod
