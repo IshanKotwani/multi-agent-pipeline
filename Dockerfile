@@ -1,5 +1,5 @@
-# Slim base — small image, matches your local Python 3.12
-FROM python:3.12-slim
+# Slim base — small image, matches local dev Python 3.11
+FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
