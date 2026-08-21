@@ -45,11 +45,11 @@ Full structured logging of every agent call including complete prompt input, raw
 
 Install dependencies:
 
-pip install anthropic openai streamlit python-dotenv chromadb
+pip install -r requirements.txt
 
 Create a .env file in the project root:
 
-ANTHROPIC_API_KEY=your-api-key-here
+AICREDITS_API_KEY=your-api-key-here
 
 Run the app:
 

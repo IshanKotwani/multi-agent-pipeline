@@ -25,7 +25,7 @@ spec:
             - containerPort: 8501
           envFrom:
             - secretRef:
-                name: pipeline-secrets     # injects ANTHROPIC_API_KEY from the Secret you'll create
+                name: pipeline-secrets     # injects AICREDITS_API_KEY from the Secret you'll create
           volumeMounts:
             - name: data
               mountPath: /app/data         # where the app writes Chroma + SQLite

@@ -6,9 +6,9 @@ from debugger import log_debug
 
 load_dotenv()
 
-api_key = os.getenv("ANTHROPIC_API_KEY")
+api_key = os.getenv("AICREDITS_API_KEY")
 if not api_key:
-    raise ValueError("ANTHROPIC_API_KEY not found in .env file")
+    raise ValueError("AICREDITS_API_KEY not found in .env file")
 
 client = OpenAI(
     api_key=api_key,
